@@ -1,12 +1,8 @@
+
 feature 'Tags' do
   scenario 'I add a tag to a link' do
-    visit '/links/new'
-    fill_in 'url', with: 'www.googlie.com'
-    fill_in 'title', with: 'Googlieasdf'
-    fill_in 'tags', with: 'search engine'
-    click_button 'Create link'
-
-    link = Link.first(title: 'Googlieasdf')
+    Link.create(url: 'www.googlie.com', title: 'Google', tags: [Tag.first_or_create(name: 'search engine')])
+    link = Link.first(title: 'Google')
     expect(link.tags.map(&:name)).to include 'search engine'
   end
 end
