@@ -6,13 +6,14 @@
     <li>
       Title: <%= link.title %><br>
       URL: <%= link.url %><br>
-      Tags: <%= link.tags %>
+      Tags: <%= link.tags.map(&:name).join(', ') %>
     </li>
   </h3>
   <% end %>
 </ul>
 
-<h2> <a href='/links/new'> Fancy adding a link? </a> </h2>
+<h2> <a href='/links/new'> Fancy adding a link? </a> </h2><br>
+<h2> <a href='/tags'> Fancy filtering your links by tag...? </a></h2>
 <a href='/'> Or something else.... </a>
 <% 50.times do %>
 <br>

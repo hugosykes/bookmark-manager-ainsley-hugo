@@ -18,9 +18,23 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     link = Link.create(url: params[:url], title: params[:title])
-    tag = Tag.first_or_create(name: params[:tags])
+    tag = Tag.first_or_create(name: params[:tags].downcase)
     link.tags << tag
     link.save
     redirect '/links'
+  end
+
+  get '/tags' do
+    erb :'tags/filter'
+  end
+
+  post '/tags/filter' do
+    redirect "/tag/#{params[:tag]}"
+  end
+
+  get '/tag/:name' do |tag|
+    @links = Link.all
+    @links.select! { |link| link.tags.map(&:name).include?(tag.downcase) }
+    erb :'links/index'
   end
 end
