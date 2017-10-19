@@ -1,0 +1,20 @@
+<h1> Links </h1>
+
+<ul id='links'>
+  <% @links.each do |link| %>
+  <h3>
+    <li>
+      Title: <%= link.title %><br>
+      URL: <%= link.url %><br>
+      Tags: <%= link.tags %>
+    </li>
+  </h3>
+  <% end %>
+</ul>
+
+<h2> <a href='/links/new'> Fancy adding a link? </a> </h2>
+<a href='/'> Or something else.... </a>
+<% 50.times do %>
+<br>
+<%end%>
+<a href='/'> or checkout our sick homepage </a>
