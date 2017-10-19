@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Submits a new link' do
   scenario 'I want add the site address' do
     visit '/links/new'

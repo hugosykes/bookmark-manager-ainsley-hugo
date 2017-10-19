@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Viewing links' do
   scenario 'I can see existing links on the homepage' do
     Link.create(url: 'http://www.makersacademy.com', title: 'Makers Academy')
