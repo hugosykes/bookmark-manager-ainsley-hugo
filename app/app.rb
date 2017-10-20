@@ -4,19 +4,20 @@ ENV['RACK_ENV'] ||= 'development'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+  set :session_secret, 'super secret'
 
   get '/' do
     erb :index
   end
 
-  post '/login' do
-    session[:user] = params[:user]
-    redirect '/links'
-  end
+  # post '/login' do
+  #   session[:user] = params[:user]
+  #   redirect '/links'
+  # end
 
   get '/links' do
     @links = Link.all
-    @user = session[:user]
+    @current_user = current_user
     erb :'links/index'
   end
 
@@ -42,6 +43,23 @@ class BookmarkManager < Sinatra::Base
   get '/tag/:name' do |tag|
     @links = Link.all
     @links.select! { |link| link.tags.map(&:name).include?(tag.downcase) }
+    @current_user = current_user
     erb :'links/index'
+  end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
+    redirect '/links'
+  end
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
   end
 end
