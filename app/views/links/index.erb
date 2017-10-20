@@ -6,7 +6,7 @@
   <h3>
     <li>
       Title: <%= link.title %><br>
-      URL: <%= link.url %><br>
+      URL: <a href=<%=link.url%>><%=link.url%></a><br>
       Tags: <%= link.tags.map(&:name).join(', ') %>
     </li>
   </h3>

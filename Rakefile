@@ -1,4 +1,4 @@
-# ENV['RACK_ENV'] ||= 'development'
+ENV['RACK_ENV'] ||= 'development'
 require './app/data_mapper_setup'
 
 namespace :db do
